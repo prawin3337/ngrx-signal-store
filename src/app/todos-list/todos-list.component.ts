@@ -6,6 +6,7 @@ import { MatListModule } from '@angular/material/list';
 import { TodosStore } from '../stores/todos.store';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { NgStyle } from '@angular/common';
 
 @Component({
   selector: 'app-todos-list',
@@ -16,6 +17,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatListModule,
     MatIconModule,
     MatProgressSpinnerModule,
+    NgStyle
   ],
   templateUrl: './todos-list.component.html',
   styleUrl: './todos-list.component.scss'
@@ -30,5 +32,9 @@ export class TodosListComponent {
   async deleteTodo($event: MouseEvent, id: number) {
     $event.stopPropagation();
     await this.store.deleteTodo(id);
+  }
+
+  async updateTodo(id: number, completed: boolean) {
+    await this.store.toggleTodo(id, completed)
   }
 }

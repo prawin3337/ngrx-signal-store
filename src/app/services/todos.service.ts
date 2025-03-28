@@ -20,7 +20,11 @@ export class TodosService {
   }
   
   async deleteTodo(id: number) {
-    await sleep(1000);
+    await sleep(500);
+  }
+
+  async updateTodo(id: number) {
+    await sleep(500);
   }
 }
 
