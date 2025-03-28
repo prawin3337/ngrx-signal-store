@@ -1,4 +1,4 @@
-import { Component, effect, inject, viewChild } from '@angular/core';
+import { Component, effect, inject, OnInit, viewChild } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonToggleChange, MatButtonToggleGroup, MatButtonToggleModule } from '@angular/material/button-toggle';
@@ -22,7 +22,7 @@ import { NgStyle } from '@angular/common';
   templateUrl: './todos-list.component.html',
   styleUrl: './todos-list.component.scss'
 })
-export class TodosListComponent {
+export class TodosListComponent implements OnInit {
   store = inject(TodosStore)
   filter = viewChild.required(MatButtonToggleGroup)
 
@@ -31,6 +31,14 @@ export class TodosListComponent {
       const filter = this.filter();
       filter.value = this.store.filter();
     })
+  }
+
+  async ngOnInit(): Promise<void> {
+    await this.loadTodos();
+  }
+
+  async loadTodos(): Promise<void> {
+    await this.store.loadAllTodo()
   }
 
   async addTodo(title: string) {

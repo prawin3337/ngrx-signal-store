@@ -6,19 +6,10 @@ import { TodosListComponent } from "./todos-list/todos-list.component";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, JsonPipe, TodosListComponent],
+  imports: [RouterOutlet, TodosListComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   title = 'ngrx-signal-store';
-  store = inject(TodosStore)
-
-  async ngOnInit(): Promise<void> {
-    await this.loadTodos();
-  }
-
-  async loadTodos(): Promise<void> {
-    await this.store.loadAllTodo()
-  }
 }
